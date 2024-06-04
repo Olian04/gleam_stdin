@@ -23,11 +23,3 @@ pub fn stdin() -> iterator.Iterator(String) {
   |> iterator.take_while(result.is_ok)
   |> iterator.map(assert_upwrap)
 }
-
-import gleam/io
-
-pub fn main() {
-  stdin()
-  |> iterator.to_list
-  |> io.debug
-}
