@@ -13,18 +13,15 @@ fn read_line() -> Result(String, Nil) {
   |> result.nil_error()
 }
 
+fn assert_upwrap(res: Result(a, _)) -> a {
+  let assert Ok(a) = res
+  a
+}
+
 pub fn stdin() -> iterator.Iterator(String) {
   iterator.repeatedly(read_line)
-  |> iterator.take_while(fn(it) {
-    case it {
-      Ok(_) -> True
-      Error(_) -> False
-    }
-  })
-  |> iterator.map(fn(it) {
-    let assert Ok(line) = it
-    line
-  })
+  |> iterator.take_while(result.is_ok)
+  |> iterator.map(assert_upwrap)
 }
 
 import gleam/io
