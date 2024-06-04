@@ -6,28 +6,39 @@ const NEW_LINE = '\n'.charCodeAt(0);
 function* stdinGenerator() {
   process.stdin.resume();
 
-  let lineBuff = Buffer.allocUnsafe(0);
-
-  try {
-    while (true) {
-      const readBuff = Buffer.allocUnsafe(1);
-      const read = readSync(process.stdin.fd, readBuff, 0, 1);
-      if (read === 0) {
-        // EOF
+  let lineBuff = Buffer.allocUnsafe(1);
+  while (true) {
+    try {
+      if (readSync(process.stdin.fd, lineBuff, 0, 1) === 0) {
+        // Read EOF from stdin
+        return;
+      } else {
+        // Read byte from stdin
         break;
       }
-      lineBuff = Buffer.concat([lineBuff, readBuff]);
-      if (readBuff[0] === NEW_LINE) {
-        yield lineBuff.toString();
-        lineBuff = Buffer.allocUnsafe(0);
+    } catch (err) {
+      if (err.code === 'EAGAIN') {
+        continue;
       }
+      throw err;
     }
+  }
 
-    if (lineBuff.length > 0) {
-      yield lineBuff.toString();
+  while (true) {
+    const readBuff = Buffer.allocUnsafe(1);
+    if (readSync(process.stdin.fd, readBuff, 0, 1) === 0) {
+      // EOF
+      break;
     }
-  } catch {
-    return [];
+    lineBuff = Buffer.concat([lineBuff, readBuff]);
+    if (readBuff[0] === NEW_LINE) {
+      yield lineBuff.toString();
+      lineBuff = Buffer.allocUnsafe(0);
+    }
+  }
+
+  if (lineBuff.length > 0) {
+    yield lineBuff.toString();
   }
 }
 
