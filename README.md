@@ -3,7 +3,7 @@
 
 # stdin
 
-`stdin` provides a synchronous iterator for consuming stdin. It supports all the non-browser targets, Erlang, Node, Deno, and Bun.
+`stdin` provides a synchronous iterator for consuming stdin. It supports all the non-browser targets, Erlang, Node, ~~Deno~~ (WIP), and Bun.
 
 ```sh
 gleam add stdin
