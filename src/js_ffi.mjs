@@ -3,15 +3,13 @@ import { Buffer } from 'node:buffer';
 
 const NEW_LINE = '\n'.charCodeAt(0);
 
-function* stdinGenerator() {
-  const stdinFileDescriptor = (() => {
-    if (globalThis.Deno) {
-      return globalThis.Deno.stdin.rid;
-    } else {
-      return process.stdin.resume().fd;
-    }
-  })();
+/**
+ * Do not use process.stdin.fd as it causes a strange bug on Unix systems when running on Nodejs
+ * See https://github.com/Olian04/gleam-stdin/issues/3
+ */
+const stdinFileDescriptor = 0;
 
+function* stdinGenerator() {
   let lineBuff = Buffer.allocUnsafe(1);
   while (true) {
     try {

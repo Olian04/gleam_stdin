@@ -12,7 +12,7 @@ The goal of this package is to provide a uniform way of consuming stdin for all 
 | Windows 10   | All OK.       | `2024-06-08` |
 | macOS 14.5   | All OK.       | `2024-06-11` |
 | Ubuntu 24.04 | All OK.       | `2024-06-11` |
-| Fedora 40    | All OK? #3    | `2024-06-11` |
+| Fedora 40    | All OK.       | `2024-06-11` |
 
 ```sh
 gleam add stdin
