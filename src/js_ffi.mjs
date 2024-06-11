@@ -8,15 +8,14 @@ function* stdinGenerator() {
     if (globalThis.Deno) {
       return globalThis.Deno.stdin.rid;
     } else {
-      process.stdin.resume();
-      return process.stdin.fd;
+      return process.stdin.resume().fd;
     }
   })();
 
   let lineBuff = Buffer.allocUnsafe(1);
   while (true) {
     try {
-      if (readSync(stdinFileDescriptor, lineBuff, 0, 1) === 0) {
+      if (readSync(stdinFileDescriptor, lineBuff, 0, 1, null) === 0) {
         // Read EOF from stdin
         return;
       } else {
@@ -33,7 +32,7 @@ function* stdinGenerator() {
 
   while (true) {
     const readBuff = Buffer.allocUnsafe(1);
-    if (readSync(stdinFileDescriptor, readBuff, 0, 1) === 0) {
+    if (readSync(stdinFileDescriptor, readBuff, 0, 1, null) === 0) {
       // EOF
       break;
     }
