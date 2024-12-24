@@ -1,9 +1,9 @@
 import gleam/io
-import gleam/iterator
+import gleam/yielder
 import stdin.{stdin}
 
 pub fn main() {
   stdin()
-  |> iterator.to_list
+  |> yielder.to_list
   |> io.debug
 }

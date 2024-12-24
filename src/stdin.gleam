@@ -1,6 +1,6 @@
 import gleam/dynamic
-import gleam/iterator
 import gleam/result
+import gleam/yielder
 
 @external(erlang, "io", "get_line")
 @external(javascript, "./js_ffi.mjs", "read_line")
@@ -18,8 +18,8 @@ fn assert_upwrap(res: Result(a, _)) -> a {
   a
 }
 
-pub fn stdin() -> iterator.Iterator(String) {
-  iterator.repeatedly(read_line)
-  |> iterator.take_while(result.is_ok)
-  |> iterator.map(assert_upwrap)
+pub fn stdin() -> yielder.Yielder(String) {
+  yielder.repeatedly(read_line)
+  |> yielder.take_while(result.is_ok)
+  |> yielder.map(assert_upwrap)
 }
