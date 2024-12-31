@@ -18,6 +18,9 @@ fn assert_upwrap(res: Result(a, _)) -> a {
   a
 }
 
+/// Returns a yielder that yields each line of input from stdin as a step.
+/// Evaluating the next step of this yielder will block until a line of input 
+/// is available from stdin to read.
 pub fn stdin() -> yielder.Yielder(String) {
   yielder.repeatedly(read_line)
   |> yielder.take_while(result.is_ok)
