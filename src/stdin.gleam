@@ -1,5 +1,5 @@
 import gleam/dynamic
-import gleam/iterator
+import gleam/yielder
 import gleam/result
 
 @external(erlang, "io", "get_line")
@@ -10,7 +10,7 @@ fn read_line() -> Result(String, Nil) {
   ffi_read_line("")
   |> dynamic.from()
   |> dynamic.string()
-  |> result.nil_error()
+  |> result.replace_error(Nil)
 }
 
 fn assert_upwrap(res: Result(a, _)) -> a {
@@ -18,8 +18,8 @@ fn assert_upwrap(res: Result(a, _)) -> a {
   a
 }
 
-pub fn stdin() -> iterator.Iterator(String) {
-  iterator.repeatedly(read_line)
-  |> iterator.take_while(result.is_ok)
-  |> iterator.map(assert_upwrap)
+pub fn stdin() -> yielder.Yielder(String) {
+  yielder.repeatedly(read_line)
+  |> yielder.take_while(result.is_ok)
+  |> yielder.map(assert_upwrap)
 }
