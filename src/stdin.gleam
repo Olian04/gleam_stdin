@@ -18,7 +18,8 @@ fn assert_upwrap(res: Result(a, _)) -> a {
   a
 }
 
-pub fn stdin() -> yielder.Yielder(String) {
+/// Reads and yields lines from stdin until EOF.
+pub fn read_lines() -> yielder.Yielder(String) {
   yielder.repeatedly(read_line)
   |> yielder.take_while(result.is_ok)
   |> yielder.map(assert_upwrap)

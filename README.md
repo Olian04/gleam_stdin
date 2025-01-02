@@ -7,12 +7,12 @@
 
 The goal of this package is to provide a uniform way of consuming stdin for all supported targets on all supported platforms.
 
-| Platform     | Target Status | Date         |
+| Platform     | Tested version | Date         |
 |:------------:|:-------------:|:------------:|
-| Windows 10   | All OK.       | `2024-06-08` |
-| macOS 14.5   | All OK.       | `2024-06-11` |
-| Ubuntu 24.04 | All OK.       | `2024-06-11` |
-| Fedora 40    | All OK.       | `2024-06-11` |
+| Windows 10   | 1.1.4         | `2024-06-08` |
+| macOS 15.2   | 2.0.0         | `2025-01-02` |
+| Ubuntu 24.04 | 2.0.0         | `2025-01-02` |
+| Fedora 40    | 2.0.0         | `2025-01-02` |
 
 ```sh
 gleam add stdin
@@ -20,14 +20,15 @@ gleam add stdin
 
 ```gleam
 import gleam/io
-import gleam/iterator
-import stdin.{stdin}
+import gleam/yielder
+import stdin
 
 pub fn main() {
-  stdin()
-  |> iterator.to_list
+  stdin.read_lines()
+  |> yielder.to_list
   |> io.debug
 }
+
 ```
 
 Further documentation can be found at <https://hexdocs.pm/stdin>.
