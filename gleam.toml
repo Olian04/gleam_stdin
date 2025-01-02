@@ -1,5 +1,5 @@
 name = "stdin"
-version = "2.0.0"
+version = "2.0.1"
 description = "This package provides a synchronous iterator for consuming stdin. It supports all the non-browser targets, Erlang, Node, Deno, and Bun."
 licences = ["MIT"]
 repository = { type = "github", user = "olian04", repo = "gleam-stdin" }

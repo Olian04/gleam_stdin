@@ -9,7 +9,7 @@ The goal of this package is to provide a uniform way of consuming stdin for all 
 
 | Platform     | Tested version | Date         |
 |:------------:|:-------------:|:------------:|
-| Windows 10   | 1.1.4         | `2025-01-02` |
+| Windows 10   | 2.0.0         | `2025-01-02` |
 | macOS 15.2   | 2.0.0         | `2025-01-02` |
 | Ubuntu 24.04 | 2.0.0         | `2025-01-02` |
 | Fedora 40    | 2.0.0         | `2025-01-02` |
