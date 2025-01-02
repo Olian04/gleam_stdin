@@ -36,8 +36,5 @@ Further documentation can be found at <https://hexdocs.pm/stdin>.
 ## Development
 
 ```sh
-cat README.md | gleam test --target=javascript --runtime=node
-cat README.md | gleam test --target=javascript --runtime=bun
-cat README.md | gleam test --target=javascript --runtime=deno
-cat README.md | gleam test --target=erlang
+./run_test.sh
 ```
