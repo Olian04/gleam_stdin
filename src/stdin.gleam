@@ -1,4 +1,5 @@
 import gleam/dynamic
+import gleam/dynamic/decode
 import gleam/result
 import gleam/yielder
 
@@ -8,9 +9,8 @@ fn ffi_read_line(prompt: String) -> dynamic.Dynamic
 
 fn read_line() -> Result(String, Nil) {
   ffi_read_line("")
-  |> dynamic.from()
-  |> dynamic.string()
-  |> result.nil_error()
+  |> decode.run(decode.string)
+  |> result.replace_error(Nil)
 }
 
 fn assert_upwrap(res: Result(a, _)) -> a {
