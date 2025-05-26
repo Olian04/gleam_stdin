@@ -10,7 +10,7 @@ The goal of this package is to provide a uniform way of consuming stdin for all 
 | Platform     | Tested version | Date         |
 |:------------:|:-------------:|:------------:|
 | Windows 10   | 2.0.0         | `2025-01-02` |
-| macOS 15.2   | 2.0.0         | `2025-01-02` |
+| macOS 15.5   | 2.0.2         | `2025-05-22` |
 | Ubuntu 24.04 | 2.0.0         | `2025-01-02` |
 | Fedora 40    | 2.0.0         | `2025-01-02` |
 
@@ -26,7 +26,7 @@ import stdin
 pub fn main() {
   stdin.read_lines()
   |> yielder.to_list
-  |> io.debug
+  |> echo
 }
 
 ```
